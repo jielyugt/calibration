@@ -3,7 +3,7 @@ from __future__ import division, print_function
 import sklearn.metrics as metrics
 import numpy as np
 import pickle
-import keras
+import tensorflow.keras as keras
 
     
 def evaluate_model(model, weights_file, x_test, y_test, bins = 15, verbose = True, pickle_file = None, x_val = None, y_val = None):
@@ -30,7 +30,7 @@ def evaluate_model(model, weights_file, x_test, y_test, bins = 15, verbose = Tru
     last_layer = model.layers.pop()
     last_layer.activation = keras.activations.linear
     i = model.input
-    o = last_layer(model.layers[-1].output)
+    o = last_layer(model.layers[-2].output)
     model = keras.models.Model(inputs=i, outputs=[o])
     
     # First load in the weights
@@ -78,8 +78,9 @@ def evaluate_model(model, weights_file, x_test, y_test, bins = 15, verbose = Tru
             y_val = np.array([[np.where(r==1)[0][0]] for r in y_val])  # Also convert back to np.array, TODO argmax?
             
         if verbose:
-            print("Pickling the probabilities for validation and test.")
-            print("Validation accuracy: ", metrics.accuracy_score(y_val, y_preds_val) * 100)
+            pass
+            # print("Pickling the probabilities for validation and test.")
+            # print("Validation accuracy: ", metrics.accuracy_score(y_val, y_preds_val) * 100)
             
         # Write file with pickled data
         with open(pickle_file + '_logits.p', 'wb') as f:

@@ -6,7 +6,7 @@ from sklearn.metrics import log_loss
 import pandas as pd
 import time
 from sklearn.metrics import log_loss, brier_score_loss
-from keras.losses import categorical_crossentropy
+from tensorflow.keras.losses import categorical_crossentropy
 from os.path import join
 import sklearn.metrics as metrics
 # Imports to get "utility" package

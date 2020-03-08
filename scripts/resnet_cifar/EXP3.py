@@ -225,7 +225,7 @@ get_ipython().system('mkdir $checkpoint_dir')
 # set callbacks
 lr_scheduler = LearningRateScheduler(lr_schedule)
 checkpoint = ModelCheckpoint(filepath=checkpoint_path, save_weights_only=True, verbose=1, period=10)
-callbacks = [lr_scheduler, cp_callback]
+callbacks = [lr_scheduler, checkpoint]
 
 # lr_reducer = ReduceLROnPlateau(factor=np.sqrt(0.1),
 #                                cooldown=0,
